@@ -1,6 +1,7 @@
-const express = require('express');
 const { default: makeWASocket, useMultiFileAuthState, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
 const qrcode = require('qrcode-terminal');
+const express = require('express');
+
 
 // Kike bot responses
 const kike_responses = [
@@ -14,60 +15,104 @@ const kike_responses = [
   "Seguimos adelante"
 ];
 
+const MAX_RETRIES = 5; // Maximum number of retries
+let retryCount = 0;
+
 const PORT = process.env.PORT || 8080;
 
-// Start Express server to satisfy Cloud Run's health check
+// Start Express server for health checks
 const app = express();
 app.get('/', (req, res) => res.send('WhatsApp Bot is running'));
-app.listen(PORT, () => console.log(`Health check server listening on port ${PORT}`));
+app.listen(PORT, () => console.log(`Health check server running on port ${PORT}`));
+
 
 // Function to initialize the bot
 const startBot = async () => {
-  const { state, saveCreds } = await useMultiFileAuthState('./auth_info');
-  const store = makeInMemoryStore({});
-  const sock = makeWASocket({ auth: state, printQRInTerminal: true });
+  console.log('Initializing WhatsApp bot...');
 
-  store.bind(sock.ev);
+  try {
+    const { state, saveCreds } = await useMultiFileAuthState('./auth_info');
+    const store = makeInMemoryStore({});
+    const sock = makeWASocket({ auth: state, printQRInTerminal: true });
 
-  // Listen for QR code
-  sock.ev.on('connection.update', (update) => {
-    const { connection, qr } = update;
-    if (qr) {
-      console.log('Scan the QR code to authenticate');
-      qrcode.generate(qr, { small: true });
-    }
-    if (connection === 'open') {
-      console.log('Connected successfully!');
-    }
-  });
+    store.bind(sock.ev);
 
-  sock.ev.on('creds.update', saveCreds);
+    // Listen for QR code
+    sock.ev.on('connection.update', (update) => {
+      const { connection, lastDisconnect, qr } = update;
 
-  // Listen to messages
-  sock.ev.on('messages.upsert', async (m) => {
-    const message = m.messages[0];
-    if (!message.message || message.key.fromMe) return;
-
-    const from = message.key.remoteJid; // Sender ID or group ID
-    const textMessage = message.message.conversation || message.message.extendedTextMessage?.text;
-    const msg = textMessage.toLowerCase();
-
-    console.log(`[${from}] ${textMessage}`);
-
-    if (from.endsWith('@g.us')) {
-      if (msg.includes('kike bot') || msg.includes('kikebot')) {
-        const randomResponse = kike_responses[Math.floor(Math.random() * kike_responses.length)];
-        await sock.sendMessage(from, { text: randomResponse });
-      } else if (msg === '!commands') {
-        await sock.sendMessage(from, { text: `Estos son los comandos que puedes usar:\n- kikebot\n- kike bot` });
-      } else if (msg.includes('napo')) {
-        await sock.sendMessage(from, { text: `Napo es un pendejo` });
+      if (qr) {
+        console.log('Scan the QR code to authenticate');
+        qrcode.generate(qr, { small: true });
       }
+
+      if (connection === 'close') {
+        const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== 401;
+        console.log('Connection closed. Reconnecting...', shouldReconnect);
+
+        if (shouldReconnect) {
+          if (retryCount < MAX_RETRIES) {
+            retryCount++;
+            console.log(`Retry attempt ${retryCount} of ${MAX_RETRIES}`);
+            startBot();
+          } else {
+            console.error('Max retries reached. Exiting...');
+            process.exit(1);
+          }
+        } else {
+          console.error('Authentication error. Please re-scan the QR code.');
+          process.exit(1);
+        }
+      }
+
+      if (connection === 'open') {
+        console.log('Connected successfully!');
+        retryCount = 0; // Reset retry count on successful connection
+      }
+    });
+
+    sock.ev.on('creds.update', saveCreds);
+
+    // Listen to messages
+    sock.ev.on('messages.upsert', async (m) => {
+      const message = m.messages[0];
+      if (!message.message || message.key.fromMe) return;
+
+      const from = message.key.remoteJid; // Sender ID or group ID
+      const textMessage = message.message.conversation || message.message.extendedTextMessage?.text;
+      if (textMessage == null) {
+        return;
+      }
+      const msg = textMessage.toLowerCase();
+      console.log(`[${from}] ${textMessage}`);
+      console.log(from.includes("1625327984@g.us"));
+      console.log(msg.includes('kike bot') || msg.includes('kikebot'));
+
+      if (from.includes("1625327984@g.us")) {
+        if (msg.includes('kike bot') || msg.includes('kikebot')) {
+          const randomResponse = kike_responses[Math.floor(Math.random() * kike_responses.length)];
+          await sock.sendMessage(from, { text: randomResponse });
+        } else if (msg === '!commands') {
+          await sock.sendMessage(from, { text: `Estos son los comandos que puedes usar:\n- kikebot\n- kike bot` });
+        } else if (msg.includes('napo')) {
+          await sock.sendMessage(from, { text: `Napo es un pendejo` });
+        }
+      }
+    });
+
+  } catch (error) {
+    console.error('Failed to start the bot:', error);
+
+    if (retryCount < MAX_RETRIES) {
+      retryCount++;
+      console.log(`Retry attempt ${retryCount} of ${MAX_RETRIES}`);
+      startBot();
+    } else {
+      console.error('Max retries reached. Exiting...');
+      process.exit(1);
     }
-  });
+  }
 };
 
 // Start the bot
-startBot().catch((err) => {
-  console.error('Failed to start the bot:', err);
-});
+startBot();
