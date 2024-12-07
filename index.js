@@ -8,7 +8,10 @@ const kike_responses = [
   "No es de ahuevo ganar, lo importante es divertirse",
   "Ni pedo, a levantar la cabeza, fue un partido difícil, y a pensar en el juego del fin de semana",
   "La bronca de ten hag es que sus títulos menores enmascararon los resultados malos",
-  "Ya me llego el anillo de Pinedo"
+  "Ya me llego el anillo de Pinedo",
+  "No importa lo que yo opine, porque la hubieran usado o no, yo no me bajo del barco de amorin",
+  "Valen verga esos cabrones",
+  "Seguimos adelante"
 ];
 
 const PORT = process.env.PORT || 8080;
