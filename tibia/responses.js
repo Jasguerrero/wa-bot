@@ -15,8 +15,9 @@ const handleTibiaResponse = async (msg) => {
   const parts = msg.trim().split(/\s+/);
 
   // Check if the command is "!house" and has exactly 3 words
-  if (parts[0] === '!house' && parts.length === 3) {
-    const [, world, city] = parts;
+  if (parts[0] === '!house' && parts.length >= 3) {
+    const world = parts[1]; // World is always the second part
+    const city = parts.slice(2).join(' ');
 
     try {
       // Make GET request to TibiaData API
