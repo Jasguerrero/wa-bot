@@ -73,7 +73,7 @@ const getBoostedBoss = async () => {
         // Check if HTTP status code is 200
         if (response.status === 200 && response.data?.boostable_bosses?.boosted) {
           console.log(response.data)
-          const boostedBoss = response.data.boostable_bosses.boostable_bosses;
+          const boostedBoss = response.data.boostable_bosses.boosted;
           return `Boosted boss: ${boostedBoss.name}`;
         } else {
             console.log(response)
