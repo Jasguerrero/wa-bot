@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { default: makeWASocket, useMultiFileAuthState, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
 const qrcode = require('qrcode-terminal');
 const handleTibiaResponse = require('./tibia/responses');
@@ -17,6 +18,9 @@ const kike_responses = [
 
 const MAX_RETRIES = 5; // Maximum number of retries
 let retryCount = 0;
+const environment = process.env.ENVIRONMENT;
+const tibiaGroupIDs = process.env.TIBIA_GROUPS;
+const tibiaGroupSet = new Set(tibiaGroupIDs.split(','));
 
 
 // Function to initialize the bot
@@ -69,7 +73,7 @@ const startBot = async () => {
     // Listen to messages
     sock.ev.on('messages.upsert', async (m) => {
       const message = m.messages[0];
-      if (!message.message || message.key.fromMe) return;
+      if (!message.message || (message.key.fromMe && environment === "prod")) return;
 
       const from = message.key.remoteJid; // Sender ID or group ID
       const textMessage = message.message.conversation || message.message.extendedTextMessage?.text;
@@ -89,7 +93,7 @@ const startBot = async () => {
           await sock.sendMessage(from, { text: `Napo es un pendejo` });
         }
       }
-      else if(from.includes('120363346887792859')) {
+      else if(tibiaGroupSet.has(from)) {
         const r = await handleTibiaResponse(msg);
         if (r == '') {
             return;

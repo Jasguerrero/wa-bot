@@ -1,0 +1,2 @@
+TIBIA_GROUPS=""
+ENVIRONMENT="prod"
