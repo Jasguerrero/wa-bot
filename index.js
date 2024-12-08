@@ -90,7 +90,7 @@ const startBot = async () => {
         }
       }
       else if(from.includes('120363346887792859')) {
-        const r = handleTibiaResponse(msg);
+        const r = await handleTibiaResponse(msg);
         if (r == '') {
             return;
         }
