@@ -24,6 +24,7 @@ const handleTibiaResponse = async (msg) => {
 
       // Check if HTTP status code is 200
       if (response.status === 200 && response.data?.houses?.house_list) {
+        console.log(response.data)
         const houseList = response.data.houses.house_list;
 
         // Filter houses that are auctioned
