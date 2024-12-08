@@ -28,7 +28,7 @@ const handleTibiaResponse = async (msg) => {
         const houseList = response.data.houses.house_list;
 
         // Filter houses that are auctioned
-        const auctionedHouses = houseList.filter(house => house.auction?.auctioned === true);
+        const auctionedHouses = houseList.filter(house => house.auctioned === true);
 
         if (auctionedHouses.length === 0) {
           return `No auctioned houses found in ${city}, ${world}.`;
