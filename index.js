@@ -89,7 +89,7 @@ const startBot = async () => {
       console.log(msg.includes('kike bot') || msg.includes('kikebot'));
 
       if (from.includes("1625327984@g.us")) {
-        if (msg.includes('kike bot') || msg.includes('kikebot')) {
+        if (msg.includes('kike bot') || msg.includes('kikebot') || msg.includes("5663596435")) {
           const randomResponse = kike_responses[Math.floor(Math.random() * kike_responses.length)];
           await sock.sendMessage(from, { text: randomResponse });
         } else if (msg === '!commands') {
