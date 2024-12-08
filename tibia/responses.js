@@ -37,7 +37,7 @@ const handleTibiaResponse = async (msg) => {
 
         // Format auctioned houses into a readable list
         const houseDetails = auctionedHouses.map(house => {
-          return `Name: ${house.name}, Rent: ${house.rent} gold, Size: ${house.size} SQM, Time Left: ${house.auction.time_left}`;
+          return `Name: ${house.name}, Rent: ${house.rent} gold, Size: ${house.size} SQM, Current Bid: ${house.auction.current_bid}, Time Left: ${house.auction.time_left}\n`;
         }).join('\n');
 
         return `Auctioned Houses in ${city}, ${world}:\n${houseDetails}`;
