@@ -1,6 +1,6 @@
 const { default: makeWASocket, useMultiFileAuthState, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
 const qrcode = require('qrcode-terminal');
-const express = require('express');
+const handleTibiaResponse = require('./tibia/responses');
 
 
 // Kike bot responses
@@ -17,13 +17,6 @@ const kike_responses = [
 
 const MAX_RETRIES = 5; // Maximum number of retries
 let retryCount = 0;
-
-const PORT = process.env.PORT || 8080;
-
-// Start Express server for health checks
-const app = express();
-app.get('/', (req, res) => res.send('WhatsApp Bot is running'));
-app.listen(PORT, () => console.log(`Health check server running on port ${PORT}`));
 
 
 // Function to initialize the bot
@@ -85,8 +78,6 @@ const startBot = async () => {
       }
       const msg = textMessage.toLowerCase();
       console.log(`[${from}] ${textMessage}`);
-      console.log(from.includes("1625327984@g.us"));
-      console.log(msg.includes('kike bot') || msg.includes('kikebot'));
 
       if (from.includes("1625327984@g.us")) {
         if (msg.includes('kike bot') || msg.includes('kikebot') || msg.includes("5663596435")) {
@@ -97,6 +88,13 @@ const startBot = async () => {
         } else if (msg.includes('napo')) {
           await sock.sendMessage(from, { text: `Napo es un pendejo` });
         }
+      }
+      else if(from.includes('120363346887792859')) {
+        const r = handleTibiaResponse(msg);
+        if (r == '') {
+            return;
+        }
+        await sock.sendMessage(from, { text: r });
       }
     });
 
