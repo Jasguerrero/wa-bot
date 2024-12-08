@@ -6,7 +6,7 @@
 const axios = require('axios');
 const {
     TIBIA_API_URL
-} = require('./tibia/constants');
+} = require('./constants');
 
 /**
  * Parses a message and fetches house data from TibiaData API.
