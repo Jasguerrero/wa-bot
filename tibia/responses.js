@@ -1,4 +1,3 @@
-const axios = require('axios');
 /**
  * Parses a message and returns a response based on the !house command.
  * @param {string} msg - The message received.
