@@ -20,12 +20,13 @@ const handleTibiaResponse = async (msg) => {
   // Check if the command is "!house" and has exactly 3 words
   let response = ''
   if (parts[0] === '!commands') {
-    response = 'Comandos: \n!house {world} {city} (ejemplo: !house pacera thais)\n'
-  }
-  else if (parts[0] === '!house' && parts.length >= 3) {
-    const world = parts[1]; // World is always the second part
+    response = 'Comandos: \n!house {world} {city} (ejemplo: !house pacera thais)\n!boss\n'
+  } else if (parts[0] === '!house' && parts.length >= 3) {
+    const world = parts[1];
     const city = parts.slice(2).join(' ');
     response = await getHousesDetail(world, city)
+  } else if (parts[0] === '!boss') {
+    response = await getBoostedBoss();
   }
 
   // Return an empty string if no valid command is found
@@ -61,6 +62,26 @@ const getHousesDetail = async (world, city) => {
       } catch (error) {
         console.error('Error fetching house data:', error.message);
         return `Error: ${world} and ${city} not found.`;
+      }
+}
+
+const getBoostedBoss = async () => {
+    try {
+        // Make GET request to TibiaData API
+        const response = await axios.get(`${TIBIA_API_URL}/boostablebosses/`);
+  
+        // Check if HTTP status code is 200
+        if (response.status === 200 && response.data?.boostable_bosses?.boosted) {
+          console.log(response.data)
+          const boostedBoss = response.data.boostable_bosses.boostable_bosses;
+          return `Boosted boss: ${boostedBoss.name}`;
+        } else {
+            console.log(response)
+            return `Error getting boss`;
+        }
+      } catch (error) {
+        console.error('Error fetching boosted boss:', error.message);
+        return `Error`;
       }
 } 
 
