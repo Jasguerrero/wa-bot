@@ -85,19 +85,24 @@ const getBoostedBoss = async () => {
       }
 } 
 
-const isGermanyTimeBetween10And11AM = () => {
-    const now = new Date();
+const isGermanyTimeBetween10And11AM = (date) => {
+    //const now = new Date();
     const germanyTime = new Intl.DateTimeFormat('en-US', {
       timeZone: 'Europe/Berlin',
       hour: 'numeric',
       minute: 'numeric',
       hour12: false, // Use 24-hour format
-    }).formatToParts(now);
+    }).formatToParts(date);
+    console.log(germanyTime);
   
     const hour = parseInt(germanyTime.find((part) => part.type === 'hour').value, 10);
-  
-    // Check if the hour is between 10 and 11 AM
-    return hour === 10;
+    const minute = parseInt(germanyTime.find((part) => part.type === 'minute').value, 10);
+
+    // Check if time is between 10:10 AM and 11:00 AM
+    return (hour === 10 && minute >= 10) || (hour === 11 && minute === 0);
   };
 
-  module.exports = handleTibiaResponse;
+module.exports = {
+  handleTibiaResponse,
+  isGermanyTimeBetween10And11AM
+};

@@ -1,5 +1,5 @@
 const axios = require('axios');
-const handleTibiaResponse = require('../../tibia/responses');
+const {handleTibiaResponse, isGermanyTimeBetween10And11AM} = require('../../tibia/responses');
 const mockData = require('./mockData.json'); // Import mock data
 
 jest.mock('axios');
@@ -77,5 +77,15 @@ describe('handleTibiaResponse', () => {
     const response = await handleTibiaResponse(message);
 
     expect(response).toBe('');
+  });
+
+  test('is Germany time between 10AM And 11AM', async () => {
+    const noDST = new Date(Date.UTC(2024, 12, 10, 9, 30, 0)); // December
+    const DST = new Date(Date.UTC(2024, 7, 10, 9, 30, 0)); // July
+    const resultNoDST = isGermanyTimeBetween10And11AM(noDST);
+    const resultDST = isGermanyTimeBetween10And11AM(DST);
+
+    expect(resultNoDST).toBe(true);
+    expect(resultDST).toBe(false)
   });
 });
