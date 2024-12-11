@@ -1,0 +1,44 @@
+{
+    "housesResponse": {
+      "status": 200,
+      "data": {
+        "houses": {
+          "house_list": [
+            {
+              "name": "House A",
+              "rent": 1000,
+              "size": 50,
+              "auctioned": true,
+              "auction": {
+                "current_bid": 5000,
+                "time_left": "5d"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "housesEmptyResponse": {
+      "status": 200,
+      "data": {
+        "houses": {
+          "house_list": []
+        }
+      }
+    },
+    "boostedBossResponse": {
+      "status": 200,
+      "data": {
+        "boostable_bosses": {
+          "boosted": {
+            "name": "Demon"
+          }
+        }
+      }
+    },
+    "errorResponse": {
+      "status": 500,
+      "message": "Internal Server Error"
+    }
+  }
+  
