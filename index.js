@@ -65,7 +65,7 @@ const startBot = async () => {
       if (connection === 'open') {
         console.log('Connected successfully!');
         retryCount = 0; // Reset retry count on successful connection
-        setInterval(() => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore), 10 * 60 * 1000); // Every 10 minutes
+        setInterval(() => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore), 5 * 30 * 1000); // Every 5 minutes
       }
     });
 

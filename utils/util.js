@@ -9,9 +9,11 @@ const sendPeriodicMessage = async (sock, chatIDs, runnedBefore) => {
         console.log(`Running cronjob`);
         if (isGermanyTimeBetween10And11AM(new Date())) {
             const r = await handleTibiaResponse("!boss");
-            for (let i = 0; i < chatIDs.length; i++) {
-                await sock.sendMessage(chatIDs[i], { text: r });
-                console.log('Message sent to:', chatIDs[i]);
+            const arr = Array.from(chatIDs);
+            for (let i = 0; i < arr.length; i++) {
+                console.log(`Sending message to: ${arr[i]}`)
+                await sock.sendMessage(arr[i], { text: r });
+                console.log('Message sent to:', arr[i]);
             }
             runnedBefore[0] = true;
         } else {
