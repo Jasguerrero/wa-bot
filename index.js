@@ -21,7 +21,7 @@ let retryCount = 0;
 const environment = process.env.ENVIRONMENT;
 const tibiaGroupIDs = process.env.TIBIA_GROUPS;
 const tibiaGroupSet = new Set(tibiaGroupIDs.split(','));
-let runnedBefore = [false];
+let runnedBefore = {};
 
 // Function to initialize the bot
 const startBot = async () => {
