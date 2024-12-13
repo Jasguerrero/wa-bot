@@ -36,11 +36,11 @@ const handleTibiaResponse = async (msg) => {
 const getHousesDetail = async (world, city) => {
     try {
         // Make GET request to TibiaData API
+        console.log('Fetching house data...')
         const response = await axios.get(`${TIBIA_API_URL}/houses/${world}/${city}`);
   
         // Check if HTTP status code is 200
         if (response.status === 200 && response.data?.houses?.house_list) {
-          console.log(response.data)
           const houseList = response.data.houses.house_list;
   
           // Filter houses that are auctioned
@@ -68,11 +68,11 @@ const getHousesDetail = async (world, city) => {
 const getBoostedBoss = async () => {
     try {
         // Make GET request to TibiaData API
+        console.log('Fetching boosted boss...')
         const response = await axios.get(`${TIBIA_API_URL}/boostablebosses/`);
   
         // Check if HTTP status code is 200
         if (response.status === 200 && response.data?.boostable_bosses?.boosted) {
-          console.log(response.data)
           const boostedBoss = response.data.boostable_bosses.boosted;
           return `Boosted boss: ${boostedBoss.name}`;
         } else {

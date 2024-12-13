@@ -1,3 +1,4 @@
+require('log-timestamp');
 require('dotenv').config();
 const { default: makeWASocket, useMultiFileAuthState, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
 const qrcode = require('qrcode-terminal');
