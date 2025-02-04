@@ -66,23 +66,19 @@ const getHousesDetail = async (world, city) => {
 }
 
 const getBoostedBoss = async () => {
-    try {
-        // Make GET request to TibiaData API
-        console.log('Fetching boosted boss...')
-        const response = await axios.get(`${TIBIA_API_URL}/boostablebosses/`);
-  
-        // Check if HTTP status code is 200
-        if (response.status === 200 && response.data?.boostable_bosses?.boosted) {
-          const boostedBoss = response.data.boostable_bosses.boosted;
-          return `Boosted boss: ${boostedBoss.name}`;
-        } else {
-            console.log(response)
-            return `Error getting boss`;
-        }
-      } catch (error) {
-        console.error('Error fetching boosted boss:', error.message);
-        return `Error`;
+      // Make GET request to TibiaData API
+      console.log('Fetching boosted boss...')
+      const response = await axios.get(`${TIBIA_API_URL}/boostablebosses/`);
+
+      // Check if HTTP status code is 200
+      if (response.status === 200 && response.data?.boostable_bosses?.boosted) {
+        const boostedBoss = response.data.boostable_bosses.boosted;
+        return `Boosted boss: ${boostedBoss.name}`;
+      } else {
+          console.log(response)
+          return `Error getting boss`;
       }
+      
 } 
 
 const isGermanyTimeBetween10And11AM = (date) => {
