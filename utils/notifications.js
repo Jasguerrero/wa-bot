@@ -28,8 +28,8 @@ const notificationsTask = async (sock, notificationsURL) => {
                 console.log('To JID:', message.key.remoteJid);
                 sentMessages++;
 
-                data = await updateNotificationStatus(notificationsURL, notification, 'send')
-                console.log(`Mark as send ${data.id}`)
+                data = await updateNotificationStatus(notificationsURL, notification, 'sent')
+                console.log(`Marked as sent ${data.id}`)
             } else {
                 console.log(`Phone number not in whatsapp: ${jid}`)
                 data = await updateNotificationStatus(notificationsURL, notification, 'undeliverable')
