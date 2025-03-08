@@ -1,9 +1,9 @@
-require('log-timestamp');
 require('dotenv').config();
 const { default: makeWASocket, useMultiFileAuthState, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
 const qrcode = require('qrcode-terminal');
 const { handleTibiaResponse } = require('./tibia/responses');
 const { sendPeriodicMessage } = require('./utils/util');
+const { notificationsTask } = require('./utils/notifications');
 
 // Kike bot responses
 const kike_responses = [
@@ -22,6 +22,7 @@ let retryCount = 0;
 const environment = process.env.ENVIRONMENT;
 const tibiaGroupIDs = process.env.TIBIA_GROUPS;
 const tibiaGroupSet = new Set(tibiaGroupIDs.split(','));
+const ticketsNotificationsURL = process.env.TICKETS_NOTIFICATIONS_URL
 let runnedBefore = {};
 
 // Function to initialize the bot
@@ -65,8 +66,10 @@ const startBot = async () => {
 
       if (connection === 'open') {
         console.log('Connected successfully!');
+        require('log-timestamp');
         retryCount = 0; // Reset retry count on successful connection
         setInterval(() => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore), 5 * 30 * 1000); // Every 5 minutes
+        setInterval(() => notificationsTask(sock, ticketsNotificationsURL), 10 * 1000); // Every 10 seconds
       }
     });
 

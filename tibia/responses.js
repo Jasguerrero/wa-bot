@@ -77,8 +77,7 @@ const getBoostedBoss = async () => {
       } else {
           console.log(response)
           return `Error getting boss`;
-      }
-      
+      } 
 } 
 
 const isGermanyTimeBetween10And11AM = (date) => {
