@@ -1,5 +1,5 @@
 require('dotenv').config();
-const { default: makeWASocket, useMultiFileAuthState, makeInMemoryStore, jidDecode } = require('@whiskeysockets/baileys');
+const { default: makeWASocket, useMultiFileAuthState, makeInMemoryStore } = require('@whiskeysockets/baileys');
 const qrcode = require('qrcode-terminal');
 const { handleTibiaResponse } = require('./tibia/responses');
 const { sendPeriodicMessage } = require('./utils/util');
@@ -22,8 +22,44 @@ let retryCount = 0;
 const environment = process.env.ENVIRONMENT;
 const tibiaGroupIDs = process.env.TIBIA_GROUPS;
 const tibiaGroupSet = new Set(tibiaGroupIDs.split(','));
-const ticketsNotificationsURL = process.env.TICKETS_NOTIFICATIONS_URL
+const ticketsNotificationsURL = process.env.TICKETS_NOTIFICATIONS_URL;
 let runnedBefore = {};
+
+// Store references to intervals so we can clear them on reconnection
+let periodicMessageInterval = null;
+let notificationsInterval = null;
+
+// Function to clear existing intervals
+const clearIntervals = () => {
+  if (periodicMessageInterval) {
+    clearInterval(periodicMessageInterval);
+    periodicMessageInterval = null;
+  }
+  
+  if (notificationsInterval) {
+    clearInterval(notificationsInterval);
+    notificationsInterval = null;
+  }
+};
+
+// Function to set up the scheduled tasks
+const setupScheduledTasks = (sock) => {
+  // Clear any existing intervals first
+  clearIntervals();
+  
+  // Set up new intervals
+  periodicMessageInterval = setInterval(
+    () => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore), 
+    5 * 30 * 1000
+  ); // Every 5 minutes
+  
+  notificationsInterval = setInterval(
+    () => notificationsTask(sock, ticketsNotificationsURL), 
+    10 * 1000
+  ); // Every 10 seconds
+  
+  console.log('Scheduled tasks initialized');
+};
 
 // Function to initialize the bot
 const startBot = async () => {
@@ -46,6 +82,9 @@ const startBot = async () => {
       }
 
       if (connection === 'close') {
+        // Clear intervals when connection closes
+        clearIntervals();
+        
         const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== 401;
         console.log('Connection closed. Reconnecting...', shouldReconnect);
 
@@ -68,8 +107,9 @@ const startBot = async () => {
         console.log('Connected successfully!');
         require('log-timestamp');
         retryCount = 0; // Reset retry count on successful connection
-        setInterval(() => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore), 5 * 30 * 1000); // Every 5 minutes
-        setInterval(() => notificationsTask(sock, ticketsNotificationsURL), 10 * 1000); // Every 10 seconds
+        
+        // Set up the scheduled tasks after successful connection
+        setupScheduledTasks(sock);
       }
     });
 
@@ -109,6 +149,9 @@ const startBot = async () => {
 
   } catch (error) {
     console.error('Failed to start the bot:', error);
+    
+    // Clear intervals on error
+    clearIntervals();
 
     if (retryCount < MAX_RETRIES) {
       retryCount++;
@@ -120,6 +163,13 @@ const startBot = async () => {
     }
   }
 };
+
+// Handle process termination
+process.on('SIGINT', () => {
+  clearIntervals();
+  console.log('Bot shutting down...');
+  process.exit(0);
+});
 
 // Start the bot
 startBot();
