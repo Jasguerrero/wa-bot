@@ -63,8 +63,8 @@ const setupScheduledTasks = (sock) => {
   // Set up new intervals
   periodicMessageInterval = setInterval(
     () => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore, redisClient), 
-    10 * 30 * 1000
-  ); // Every 10 minutes
+    5 * 30 * 1000
+  ); // Every 5 minutes
   
   notificationsInterval = setInterval(
     () => notificationsTask(sock, ticketsNotificationsURL), 
