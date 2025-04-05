@@ -23,48 +23,22 @@ const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
         if (response !== lastResponse) {
             console.log('New boss information detected, sending messages...');
             
-            // Create a temporary file path
-            const imageName = path.basename(imageUrl);
-            const tempDir = path.join(__dirname, '../temp');
-            const imagePath = path.join(tempDir, imageName);
-            
-            // Ensure temp directory exists
-            if (!fs.existsSync(tempDir)) {
-                fs.mkdirSync(tempDir, { recursive: true });
-            }
-            
-            // Download and save the image
-            const imageResponse = await axios.get(imageUrl, {
-                responseType: 'arraybuffer',
-                headers: {
-                    'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36',
-                    'Referer': 'https://www.tibia.com',
-                    'Accept': 'image/avif,image/webp,image/apng,image/svg+xml,image/*,*/*;q=0.8'
-                }
-            });
-            
-            // Write to file
-            fs.writeFileSync(imagePath, Buffer.from(imageResponse.data));
-            console.log(`Image saved to ${imagePath}`);
+            // Convert the Tibia URL to use our local proxy
+            // Original: https://static.tibia.com/images/global/header/monsters/fearfeaster.gif
+            // New: http://localhost:3128/tibia-proxy/images/global/header/monsters/fearfeaster.gif
+            const imagePath = imageUrl.replace('https://static.tibia.com', 'http://localhost:3128/tibia-proxy');
             
             const arr = Array.from(chatIDs);
             for (let i = 0; i < arr.length; i++) {
                 console.log(`Sending message to: ${arr[i]}`);
-                console.log(imageUrl);
                 
-                // Send image from local file
+                // Send message with image through our proxy
                 await sock.sendMessage(arr[i], {
                     image: { url: imagePath },
                     caption: response
                 });
                 
                 console.log('Message sent to:', arr[i]);
-            }
-            
-            // Clean up temp file
-            if (fs.existsSync(imagePath)) {
-                fs.unlinkSync(imagePath);
-                console.log('Temp image file removed');
             }
             
             // Store the new response in Redis with 36-hour TTL

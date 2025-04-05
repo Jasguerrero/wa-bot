@@ -36,7 +36,7 @@ const notificationsTask = async (sock, notificationsURL) => {
                 console.log(`Mark as undeliverable ${data.id}`)
             }
         }
-        console.log(`Finished running notifications task, sent messages: ${sentMessages}}`);
+        console.log(`Finished running notifications task, sent messages: ${sentMessages}`);
     } catch (error) {
         console.error('Error sending periodic message:', error);
     }
