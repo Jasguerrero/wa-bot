@@ -1,4 +1,7 @@
 const {handleTibiaResponse} = require('../tibia/responses');
+const axios = require('axios');
+const fs = require('fs');
+const path = require('path');
 
 const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
     try {
@@ -19,6 +22,18 @@ const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
         // If the response is different from what we have stored in Redis, send messages
         if (response !== lastResponse) {
             console.log('New boss information detected, sending messages...');
+            
+            // Create a temporary file path
+            const imageName = path.basename(imageUrl);
+            const tempDir = path.join(__dirname, '../temp');
+            const imagePath = path.join(tempDir, imageName);
+            
+            // Ensure temp directory exists
+            if (!fs.existsSync(tempDir)) {
+                fs.mkdirSync(tempDir, { recursive: true });
+            }
+            
+            // Download and save the image
             const imageResponse = await axios.get(imageUrl, {
                 responseType: 'arraybuffer',
                 headers: {
@@ -28,15 +43,28 @@ const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
                 }
             });
             
+            // Write to file
+            fs.writeFileSync(imagePath, Buffer.from(imageResponse.data));
+            console.log(`Image saved to ${imagePath}`);
+            
             const arr = Array.from(chatIDs);
             for (let i = 0; i < arr.length; i++) {
                 console.log(`Sending message to: ${arr[i]}`);
                 console.log(imageUrl);
+                
+                // Send image from local file
                 await sock.sendMessage(arr[i], {
-                    image: { stream: imageResponse.data },
+                    image: { url: imagePath },
                     caption: response
                 });
+                
                 console.log('Message sent to:', arr[i]);
+            }
+            
+            // Clean up temp file
+            if (fs.existsSync(imagePath)) {
+                fs.unlinkSync(imagePath);
+                console.log('Temp image file removed');
             }
             
             // Store the new response in Redis with 36-hour TTL
