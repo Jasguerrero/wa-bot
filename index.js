@@ -24,7 +24,6 @@ const environment = process.env.ENVIRONMENT;
 const tibiaGroupIDs = process.env.TIBIA_GROUPS;
 const tibiaGroupSet = new Set(tibiaGroupIDs.split(','));
 const ticketsNotificationsURL = process.env.TICKETS_NOTIFICATIONS_URL;
-let runnedBefore = {};
 
 // Redis configuration
 const redisClient = redis.createClient({
@@ -62,7 +61,7 @@ const setupScheduledTasks = (sock) => {
   
   // Set up new intervals
   periodicMessageInterval = setInterval(
-    () => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore, redisClient), 
+    () => sendPeriodicMessage(sock, tibiaGroupSet, redisClient), 
     5 * 30 * 1000
   ); // Every 5 minutes
   
@@ -152,11 +151,22 @@ const startBot = async () => {
         }
       }
       else if(tibiaGroupSet.has(from)) {
-        const r = await handleTibiaResponse(msg);
+        const [r, imageUrl] = await handleTibiaResponse(msg);
         if (r == '') {
             return;
         }
-        await sock.sendMessage(from, { text: r });
+        let payload = null
+        if (imageUrl != ''){
+          payload = {
+            image: {url: imageUrl},
+            caption: r
+          }
+        } else {
+          payload = {
+            text: r
+          }
+        }
+        await sock.sendMessage(from, payload);
       }
     });
 

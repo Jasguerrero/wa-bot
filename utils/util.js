@@ -1,11 +1,11 @@
 const {handleTibiaResponse} = require('../tibia/responses');
 
-const sendPeriodicMessage = async (sock, chatIDs, _, redisClient) => {
+const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
     try {
         console.log(`Running cronjob`);
         
         // Get the boss information
-        const response = await handleTibiaResponse("!boss");
+        const [response, imageUrl] = await handleTibiaResponse("!boss");
         
         // If response contains "Error", do nothing
         if (response.includes("Error")) {
@@ -23,7 +23,11 @@ const sendPeriodicMessage = async (sock, chatIDs, _, redisClient) => {
             const arr = Array.from(chatIDs);
             for (let i = 0; i < arr.length; i++) {
                 console.log(`Sending message to: ${arr[i]}`);
-                await sock.sendMessage(arr[i], { text: response });
+                console.log(imageUrl);
+                await sock.sendMessage(arr[i], {
+                    image: { url: imageUrl },
+                    caption: response
+                });
                 console.log('Message sent to:', arr[i]);
             }
             

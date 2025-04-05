@@ -19,6 +19,7 @@ const handleTibiaResponse = async (msg) => {
 
   // Check if the command is "!house" and has exactly 3 words
   let response = ''
+  let image = ''
   if (parts[0] === '!commands') {
     response = 'Comandos: \n!house {world} {city} (ejemplo: !house pacera thais)\n!boss\n'
   } else if (parts[0] === '!house' && parts.length >= 3) {
@@ -26,11 +27,11 @@ const handleTibiaResponse = async (msg) => {
     const city = parts.slice(2).join(' ');
     response = await getHousesDetail(world, city)
   } else if (parts[0] === '!boss') {
-    response = await getBoostedBoss();
+    [response, image] = await getBoostedBoss();
   }
 
   // Return an empty string if no valid command is found
-  return response;
+  return [response, image];
 };
 
 const getHousesDetail = async (world, city) => {
@@ -73,10 +74,10 @@ const getBoostedBoss = async () => {
       // Check if HTTP status code is 200
       if (response.status === 200 && response.data?.boostable_bosses?.boosted) {
         const boostedBoss = response.data.boostable_bosses.boosted;
-        return `Boosted boss: ${boostedBoss.name}`;
+        return [`Boosted boss: ${boostedBoss.name}`, boostedBoss.image_url];
       } else {
           console.log(response)
-          return `Error getting boss`;
+          return [`Error getting boss`, ''];
       } 
 } 
 
