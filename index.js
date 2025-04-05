@@ -4,6 +4,7 @@ const qrcode = require('qrcode-terminal');
 const { handleTibiaResponse } = require('./tibia/responses');
 const { sendPeriodicMessage } = require('./utils/util');
 const { notificationsTask } = require('./utils/notifications');
+const redis = require('redis');
 
 // Kike bot responses
 const kike_responses = [
@@ -24,6 +25,18 @@ const tibiaGroupIDs = process.env.TIBIA_GROUPS;
 const tibiaGroupSet = new Set(tibiaGroupIDs.split(','));
 const ticketsNotificationsURL = process.env.TICKETS_NOTIFICATIONS_URL;
 let runnedBefore = {};
+
+// Redis configuration
+const redisClient = redis.createClient({
+  url: `redis://:${process.env.REDIS_PASSWORD}@${process.env.REDIS_HOST}:${process.env.REDIS_PORT}`
+});
+
+// Connect to Redis
+(async () => {
+  redisClient.on('error', (err) => console.log('Redis Client Error', err));
+  await redisClient.connect();
+  console.log('Connected to Redis successfully');
+})();
 
 // Store references to intervals so we can clear them on reconnection
 let periodicMessageInterval = null;
@@ -49,9 +62,9 @@ const setupScheduledTasks = (sock) => {
   
   // Set up new intervals
   periodicMessageInterval = setInterval(
-    () => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore), 
-    5 * 30 * 1000
-  ); // Every 5 minutes
+    () => sendPeriodicMessage(sock, tibiaGroupSet, runnedBefore, redisClient), 
+    10 * 30 * 1000
+  ); // Every 10 minutes
   
   notificationsInterval = setInterval(
     () => notificationsTask(sock, ticketsNotificationsURL), 
@@ -165,9 +178,13 @@ const startBot = async () => {
 };
 
 // Handle process termination
-process.on('SIGINT', () => {
+process.on('SIGINT', async () => {
   clearIntervals();
   console.log('Bot shutting down...');
+  if (redisClient.isOpen) {
+    await redisClient.quit();
+    console.log('Redis connection closed');
+  }
   process.exit(0);
 });
 
