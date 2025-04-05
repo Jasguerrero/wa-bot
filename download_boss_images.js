@@ -4,6 +4,13 @@ const path = require('path');
 
 // Function to download a single image with a delay
 const downloadImage = async (url, filepath, index, total) => {
+  // Check if the file already exists
+  if (fs.existsSync(filepath)) {
+    const percentage = Math.round((index / total) * 100);
+    console.log(`[${percentage}%] Skipped: ${path.basename(filepath)} (already exists)`);
+    return true;
+  }
+
   try {
     const response = await axios.get(url, {
       responseType: 'arraybuffer',
@@ -40,15 +47,10 @@ const downloadAllBossImages = async () => {
     const response = await axios.get('https://api.tibiadata.com/v4/boostablebosses');
     const data = response.data;
     
-    // Extract all bosses including the boosted one
+    // Extract all bosses from the list
     const bosses = [];
     
-    // Add the boosted boss
-    if (data.boostable_bosses.boosted) {
-      bosses.push(data.boostable_bosses.boosted);
-    }
-    
-    // Add all other boostable bosses
+    // Add all boostable bosses (including the currently boosted one)
     if (data.boostable_bosses.boostable_boss_list) {
       bosses.push(...data.boostable_bosses.boostable_boss_list);
     }
@@ -57,12 +59,22 @@ const downloadAllBossImages = async () => {
     
     // Download each boss image with delays to avoid being blocked
     let successCount = 0;
+    let skippedCount = 0;
     
     for (let i = 0; i < bosses.length; i++) {
       const boss = bosses[i];
       const imageUrl = boss.image_url;
       const imageName = path.basename(imageUrl);
       const imagePath = path.join(imagesDir, imageName);
+      
+      // Check if the file already exists before download
+      if (fs.existsSync(imagePath)) {
+        const percentage = Math.round((i + 1) / bosses.length * 100);
+        console.log(`[${percentage}%] Skipped: ${imageName} (already exists)`);
+        successCount++;
+        skippedCount++;
+        continue;
+      }
       
       // Download the image
       const success = await downloadImage(imageUrl, imagePath, i + 1, bosses.length);
@@ -75,15 +87,21 @@ const downloadAllBossImages = async () => {
       }
     }
     
-    console.log(`\nDownload complete! Successfully downloaded ${successCount} out of ${bosses.length} boss images.`);
+    console.log(`\nDownload complete! Successfully processed ${successCount} out of ${bosses.length} boss images.`);
+    console.log(`${skippedCount} images were already downloaded and skipped.`);
+    console.log(`${successCount - skippedCount} new images were downloaded.`);
     console.log(`Images saved to: ${imagesDir}`);
     
-    // Create a manifest file with all boss data for reference
+    // Create or update the manifest file with just the image URLs
+    const simplifiedBosses = bosses.map(boss => ({
+      image_url: boss.image_url
+    }));
+    
     fs.writeFileSync(
       path.join(imagesDir, 'bosses_manifest.json'), 
-      JSON.stringify(bosses, null, 2)
+      JSON.stringify(simplifiedBosses, null, 2)
     );
-    console.log('Created bosses_manifest.json with all boss data');
+    console.log('Created/updated bosses_manifest.json with boss image URLs');
     
   } catch (error) {
     console.error('Failed to fetch boss data:', error.message);

@@ -1,502 +1,299 @@
 [
   {
-    "name": "The Fear Feaster",
-    "image_url": "https://static.tibia.com/images/global/header/monsters/fearfeaster.gif",
-    "featured": true
+    "image_url": "https://static.tibia.com/images/library/abyssador.gif"
   },
   {
-    "name": "Abyssador",
-    "image_url": "https://static.tibia.com/images/library/abyssador.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ahau.gif"
   },
   {
-    "name": "Ahau",
-    "image_url": "https://static.tibia.com/images/library/ahau.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ameneftheburning.gif"
   },
   {
-    "name": "Amenef The Burning",
-    "image_url": "https://static.tibia.com/images/library/ameneftheburning.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/anomaly.gif"
   },
   {
-    "name": "Anomaly",
-    "image_url": "https://static.tibia.com/images/library/anomaly.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/arbaziloth4spheres.gif"
   },
   {
-    "name": "Arbaziloth",
-    "image_url": "https://static.tibia.com/images/library/arbaziloth4spheres.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/vixen.gif"
   },
   {
-    "name": "Black Vixen",
-    "image_url": "https://static.tibia.com/images/library/vixen.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/bloodhoof.gif"
   },
   {
-    "name": "Bloodback",
-    "image_url": "https://static.tibia.com/images/library/bloodhoof.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/brainhead.gif"
   },
   {
-    "name": "Brain Head",
-    "image_url": "https://static.tibia.com/images/library/brainhead.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/brokul.gif"
   },
   {
-    "name": "Brokul",
-    "image_url": "https://static.tibia.com/images/library/brokul.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/chagorz.gif"
   },
   {
-    "name": "Chagorz",
-    "image_url": "https://static.tibia.com/images/library/chagorz.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/countvlarkort.gif"
   },
   {
-    "name": "Count Vlarkorth",
-    "image_url": "https://static.tibia.com/images/library/countvlarkort.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/darkfang.gif"
   },
   {
-    "name": "Darkfang",
-    "image_url": "https://static.tibia.com/images/library/darkfang.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/deathstrike.gif"
   },
   {
-    "name": "Deathstrike",
-    "image_url": "https://static.tibia.com/images/library/deathstrike.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/representingdespor.gif"
   },
   {
-    "name": "Dragon Pack",
-    "image_url": "https://static.tibia.com/images/library/representingdespor.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/drume.gif"
   },
   {
-    "name": "Drume",
-    "image_url": "https://static.tibia.com/images/library/drume.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/dukekrule.gif"
   },
   {
-    "name": "Duke Krule",
-    "image_url": "https://static.tibia.com/images/library/dukekrule.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/earlosam.gif"
   },
   {
-    "name": "Earl Osam",
-    "image_url": "https://static.tibia.com/images/library/earlosam.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ekatrix.gif"
   },
   {
-    "name": "Ekatrix",
-    "image_url": "https://static.tibia.com/images/library/ekatrix.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/eradicator.gif"
   },
   {
-    "name": "Eradicator",
-    "image_url": "https://static.tibia.com/images/library/eradicator.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/essenceofmalice.gif"
   },
   {
-    "name": "Essence Of Malice",
-    "image_url": "https://static.tibia.com/images/library/essenceofmalice.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/facelessbane.gif"
   },
   {
-    "name": "Faceless Bane",
-    "image_url": "https://static.tibia.com/images/library/facelessbane.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ghulosh.gif"
   },
   {
-    "name": "Ghulosh",
-    "image_url": "https://static.tibia.com/images/library/ghulosh.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/gnomehorticulist.gif"
   },
   {
-    "name": "Gnomevil",
-    "image_url": "https://static.tibia.com/images/library/gnomehorticulist.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/gorzindel.gif"
   },
   {
-    "name": "Gorzindel",
-    "image_url": "https://static.tibia.com/images/library/gorzindel.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/goshnarscruelty.gif"
   },
   {
-    "name": "Goshnar's Cruelty",
-    "image_url": "https://static.tibia.com/images/library/goshnarscruelty.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/goshnarsgreed.gif"
   },
   {
-    "name": "Goshnar's Greed",
-    "image_url": "https://static.tibia.com/images/library/goshnarsgreed.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/goshnarshatred.gif"
   },
   {
-    "name": "Goshnar's Hatred",
-    "image_url": "https://static.tibia.com/images/library/goshnarshatred.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/goshnarsmalice.gif"
   },
   {
-    "name": "Goshnar's Malice",
-    "image_url": "https://static.tibia.com/images/library/goshnarsmalice.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/goshnarsspite.gif"
   },
   {
-    "name": "Goshnar's Spite",
-    "image_url": "https://static.tibia.com/images/library/goshnarsspite.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/grandmasteroberon.gif"
   },
   {
-    "name": "Grand Master Oberon",
-    "image_url": "https://static.tibia.com/images/library/grandmasteroberon.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ichgahal.gif"
   },
   {
-    "name": "Ichgahal",
-    "image_url": "https://static.tibia.com/images/library/ichgahal.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/irgix.gif"
   },
   {
-    "name": "Irgix The Flimsy",
-    "image_url": "https://static.tibia.com/images/library/irgix.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/katex.gif"
   },
   {
-    "name": "Katex Blood Tongue",
-    "image_url": "https://static.tibia.com/images/library/katex.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/kingzelos.gif"
   },
   {
-    "name": "King Zelos",
-    "image_url": "https://static.tibia.com/images/library/kingzelos.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/kusuma.gif"
   },
   {
-    "name": "Kusuma",
-    "image_url": "https://static.tibia.com/images/library/kusuma.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ladytenebris.gif"
   },
   {
-    "name": "Lady Tenebris",
-    "image_url": "https://static.tibia.com/images/library/ladytenebris.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/lloyd.gif"
   },
   {
-    "name": "Lloyd",
-    "image_url": "https://static.tibia.com/images/library/lloyd.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/lokathmor.gif"
   },
   {
-    "name": "Lokathmor",
-    "image_url": "https://static.tibia.com/images/library/lokathmor.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/lordazaram.gif"
   },
   {
-    "name": "Lord Azaram",
-    "image_url": "https://static.tibia.com/images/library/lordazaram.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/lordretro.gif"
   },
   {
-    "name": "Lord Retro",
-    "image_url": "https://static.tibia.com/images/library/lordretro.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/magmacolossus.gif"
   },
   {
-    "name": "Magma Bubble",
-    "image_url": "https://static.tibia.com/images/library/magmacolossus.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/mazoran.gif"
   },
   {
-    "name": "Mazoran",
-    "image_url": "https://static.tibia.com/images/library/mazoran.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/mazzinor.gif"
   },
   {
-    "name": "Mazzinor",
-    "image_url": "https://static.tibia.com/images/library/mazzinor.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/yselda.gif"
   },
   {
-    "name": "Megasylvan Yselda",
-    "image_url": "https://static.tibia.com/images/library/yselda.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/frozenhorror.gif"
   },
   {
-    "name": "Melting Frozen Horror",
-    "image_url": "https://static.tibia.com/images/library/frozenhorror.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/mitmahvanguard.gif"
   },
   {
-    "name": "Mitmah Vanguard",
-    "image_url": "https://static.tibia.com/images/library/mitmahvanguard.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/murcion.gif"
   },
   {
-    "name": "Murcion",
-    "image_url": "https://static.tibia.com/images/library/murcion.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/neferithespy.gif"
   },
   {
-    "name": "Neferi The Spy",
-    "image_url": "https://static.tibia.com/images/library/neferithespy.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/outburst.gif"
   },
   {
-    "name": "Outburst",
-    "image_url": "https://static.tibia.com/images/library/outburst.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/plagirath.gif"
   },
   {
-    "name": "Plagirath",
-    "image_url": "https://static.tibia.com/images/library/plagirath.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ragiaz.gif"
   },
   {
-    "name": "Ragiaz",
-    "image_url": "https://static.tibia.com/images/library/ragiaz.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ratmiral.gif"
   },
   {
-    "name": "Ratmiral Blackwhiskers",
-    "image_url": "https://static.tibia.com/images/library/ratmiral.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/ravenoushunger.gif"
   },
   {
-    "name": "Ravenous Hunger",
-    "image_url": "https://static.tibia.com/images/library/ravenoushunger.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/razzargorn.gif"
   },
   {
-    "name": "Razzagorn",
-    "image_url": "https://static.tibia.com/images/library/razzargorn.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/realityquake.gif"
   },
   {
-    "name": "Realityquake",
-    "image_url": "https://static.tibia.com/images/library/realityquake.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/rupture.gif"
   },
   {
-    "name": "Rupture",
-    "image_url": "https://static.tibia.com/images/library/rupture.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/scarlettetzelstill.gif"
   },
   {
-    "name": "Scarlett Etzel",
-    "image_url": "https://static.tibia.com/images/library/scarlettetzelstill.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/blackpelt.gif"
   },
   {
-    "name": "Shadowpelt",
-    "image_url": "https://static.tibia.com/images/library/blackpelt.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/sharpclaw.gif"
   },
   {
-    "name": "Sharpclaw",
-    "image_url": "https://static.tibia.com/images/library/sharpclaw.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/shulgrax.gif"
   },
   {
-    "name": "Shulgrax",
-    "image_url": "https://static.tibia.com/images/library/shulgrax.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/sirbaeloc.gif"
   },
   {
-    "name": "Sir Baeloc",
-    "image_url": "https://static.tibia.com/images/library/sirbaeloc.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/sirnictros.gif"
   },
   {
-    "name": "Sir Nictros",
-    "image_url": "https://static.tibia.com/images/library/sirnictros.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/sisterhetai.gif"
   },
   {
-    "name": "Sister Hetai",
-    "image_url": "https://static.tibia.com/images/library/sisterhetai.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/dragonkingzyrtrachkillable.gif"
   },
   {
-    "name": "Soul Of Dragonking Zyrtarch",
-    "image_url": "https://static.tibia.com/images/library/dragonkingzyrtrachkillable.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/srezz.gif"
   },
   {
-    "name": "Srezz Yellow Eyes",
-    "image_url": "https://static.tibia.com/images/library/srezz.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/tarbaz.gif"
   },
   {
-    "name": "Tarbaz",
-    "image_url": "https://static.tibia.com/images/library/tarbaz.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/fakeseamonster.gif"
   },
   {
-    "name": "Tentugly",
-    "image_url": "https://static.tibia.com/images/library/fakeseamonster.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/thaian.gif"
   },
   {
-    "name": "Thaian",
-    "image_url": "https://static.tibia.com/images/library/thaian.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/blazingrose.gif"
   },
   {
-    "name": "The Blazing Rose",
-    "image_url": "https://static.tibia.com/images/library/blazingrose.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/brainstealer.gif"
   },
   {
-    "name": "The Brainstealer",
-    "image_url": "https://static.tibia.com/images/library/brainstealer.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/diamondblossom.gif"
   },
   {
-    "name": "The Diamond Blossom",
-    "image_url": "https://static.tibia.com/images/library/diamondblossom.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/dreadmaiden.gif"
   },
   {
-    "name": "The Dread Maiden",
-    "image_url": "https://static.tibia.com/images/library/dreadmaiden.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/thornknight.gif"
   },
   {
-    "name": "The Enraged Thorn Knight",
-    "image_url": "https://static.tibia.com/images/library/thornknight.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/falsegod.gif"
   },
   {
-    "name": "The False God",
-    "image_url": "https://static.tibia.com/images/library/falsegod.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/fearfeaster.gif"
   },
   {
-    "name": "The Fear Feaster",
-    "image_url": "https://static.tibia.com/images/library/fearfeaster.gif",
-    "featured": true
+    "image_url": "https://static.tibia.com/images/library/flamingorchid.gif"
   },
   {
-    "name": "The Flaming Orchid",
-    "image_url": "https://static.tibia.com/images/library/flamingorchid.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/lilyofnight.gif"
   },
   {
-    "name": "The Lily Of Night",
-    "image_url": "https://static.tibia.com/images/library/lilyofnight.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/megamagmaoid.gif"
   },
   {
-    "name": "The Mega Magmaoid",
-    "image_url": "https://static.tibia.com/images/library/megamagmaoid.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/themonster.gif"
   },
   {
-    "name": "The Monster",
-    "image_url": "https://static.tibia.com/images/library/themonster.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/moonlightaster.gif"
   },
   {
-    "name": "The Moonlight Aster",
-    "image_url": "https://static.tibia.com/images/library/moonlightaster.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/nightmarebeast.gif"
   },
   {
-    "name": "The Nightmare Beast",
-    "image_url": "https://static.tibia.com/images/library/nightmarebeast.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/paleworm.gif"
   },
   {
-    "name": "The Pale Worm",
-    "image_url": "https://static.tibia.com/images/library/paleworm.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/rootkraken.gif"
   },
   {
-    "name": "The Rootkraken",
-    "image_url": "https://static.tibia.com/images/library/rootkraken.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/sandkingfinal.gif"
   },
   {
-    "name": "The Sandking",
-    "image_url": "https://static.tibia.com/images/library/sandkingfinal.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/scourgeofoblivion00.gif"
   },
   {
-    "name": "The Scourge Of Oblivion",
-    "image_url": "https://static.tibia.com/images/library/scourgeofoblivion00.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/souldespoiler.gif"
   },
   {
-    "name": "The Souldespoiler",
-    "image_url": "https://static.tibia.com/images/library/souldespoiler.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/sourceofcorruption.gif"
   },
   {
-    "name": "The Source Of Corruption",
-    "image_url": "https://static.tibia.com/images/library/sourceofcorruption.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/timeguardian.gif"
   },
   {
-    "name": "The Time Guardian",
-    "image_url": "https://static.tibia.com/images/library/timeguardian.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/voidbornvulnerable.gif"
   },
   {
-    "name": "The Unarmored Voidborn",
-    "image_url": "https://static.tibia.com/images/library/voidbornvulnerable.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/theunwelcome.gif"
   },
   {
-    "name": "The Unwelcome",
-    "image_url": "https://static.tibia.com/images/library/theunwelcome.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/winterbloom.gif"
   },
   {
-    "name": "The Winter Bloom",
-    "image_url": "https://static.tibia.com/images/library/winterbloom.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/timira.gif"
   },
   {
-    "name": "Timira The Many-Headed",
-    "image_url": "https://static.tibia.com/images/library/timira.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/unaz.gif"
   },
   {
-    "name": "Unaz The Mean",
-    "image_url": "https://static.tibia.com/images/library/unaz.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/urmahlulluweakest.gif"
   },
   {
-    "name": "Urmahlullu The Weakened",
-    "image_url": "https://static.tibia.com/images/library/urmahlulluweakest.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/utua.gif"
   },
   {
-    "name": "Utua Stone Sting",
-    "image_url": "https://static.tibia.com/images/library/utua.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/vemiath.gif"
   },
   {
-    "name": "Vemiath",
-    "image_url": "https://static.tibia.com/images/library/vemiath.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/vok.gif"
   },
   {
-    "name": "Vok The Freakish",
-    "image_url": "https://static.tibia.com/images/library/vok.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/yirkass.gif"
   },
   {
-    "name": "Yirkas Blue Scales",
-    "image_url": "https://static.tibia.com/images/library/yirkass.gif",
-    "featured": false
-  },
-  {
-    "name": "Zamulosh",
-    "image_url": "https://static.tibia.com/images/library/zamulosh.gif",
-    "featured": false
+    "image_url": "https://static.tibia.com/images/library/zamulosh.gif"
   }
 ]
