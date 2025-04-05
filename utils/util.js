@@ -1,13 +1,11 @@
 const {handleTibiaResponse} = require('../tibia/responses');
-const fs = require('fs');
-const path = require('path');
 
 const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
     try {
         console.log(`Running cronjob`);
         
         // Get the boss information
-        const [response, imageUrl] = await handleTibiaResponse("!boss");
+        const [response, imagePath] = await handleTibiaResponse("!boss");
         
         // If response contains "Error", do nothing
         if (response.includes("Error")) {
@@ -21,26 +19,15 @@ const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
         // If the response is different from what we have stored in Redis, send messages
         if (response !== lastResponse) {
             console.log('New boss information detected, sending messages...');
-            
-            // Extract the filename from the URL
-            const imageName = path.basename(imageUrl);
-            
-            // Path to the downloaded boss images
-            const bossImagesDir = path.join(__dirname, '../boss_images');
-            const bossImagePath = path.join(bossImagesDir, imageName);
-            
-            // Check if we have the image
-            const hasImage = fs.existsSync(bossImagePath);
-            console.log(`${hasImage ? 'Found' : 'Could not find'} image: ${imageName}`);
-            
             const arr = Array.from(chatIDs);
+
             for (let i = 0; i < arr.length; i++) {
                 console.log(`Sending message to: ${arr[i]}`);
                 
-                if (hasImage) {
+                if (imagePath != '') {
                     // Send message with local boss image
                     await sock.sendMessage(arr[i], {
-                        image: { url: bossImagePath },
+                        image: { url: imagePath },
                         caption: response
                     });
                 } else {

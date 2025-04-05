@@ -7,6 +7,8 @@ const axios = require('axios');
 const {
     TIBIA_API_URL
 } = require('./constants');
+const fs = require('fs');
+const path = require('path');
 
 /**
  * Parses a message and fetches house data from TibiaData API.
@@ -74,12 +76,28 @@ const getBoostedBoss = async () => {
       // Check if HTTP status code is 200
       if (response.status === 200 && response.data?.boostable_bosses?.boosted) {
         const boostedBoss = response.data.boostable_bosses.boosted;
-        return [`Boosted boss: ${boostedBoss.name}`, boostedBoss.image_url];
+        return [`Boosted boss: ${boostedBoss.name}`, `${getImage('boss_images', boostedBoss.image_url)}`];
       } else {
           console.log(response)
           return [`Error getting boss`, ''];
       } 
-} 
+}
+
+const getImage = (imageDir, imageUrl) => {
+  const imageName = path.basename(imageUrl);
+
+  // Path to the downloaded boss images
+  const fullDir = path.join(__dirname, `../${imageDir}`);
+  const imagePath = path.join(fullDir, imageName);
+  
+  // Check if we have the image
+  const hasImage = fs.existsSync(imagePath);
+  console.log(`${hasImage ? 'Found' : 'Could not find'} image: ${imagePath}`);
+  if (hasImage){
+    return imagePath
+  }
+  return ''
+}
 
 const isGermanyTimeBetween10And11AM = (date) => {
     //const now = new Date();

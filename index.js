@@ -151,14 +151,14 @@ const startBot = async () => {
         }
       }
       else if(tibiaGroupSet.has(from)) {
-        const [r, imageUrl] = await handleTibiaResponse(msg);
+        const [r, imagePath] = await handleTibiaResponse(msg);
         if (r == '') {
             return;
         }
         let payload = null
-        if (imageUrl != ''){
+        if (imagePath != ''){
           payload = {
-            image: {url: imageUrl},
+            image: {url: imagePath},
             caption: r
           }
         } else {
