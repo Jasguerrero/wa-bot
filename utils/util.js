@@ -1,5 +1,4 @@
 const {handleTibiaResponse} = require('../tibia/responses');
-const axios = require('axios');
 const fs = require('fs');
 const path = require('path');
 
@@ -23,20 +22,33 @@ const sendPeriodicMessage = async (sock, chatIDs, redisClient) => {
         if (response !== lastResponse) {
             console.log('New boss information detected, sending messages...');
             
-            // Convert the Tibia URL to use our local proxy
-            // Original: https://static.tibia.com/images/global/header/monsters/fearfeaster.gif
-            // New: http://localhost:3128/tibia-proxy/images/global/header/monsters/fearfeaster.gif
-            const imagePath = imageUrl.replace('https://static.tibia.com', 'http://localhost:3128/tibia-proxy');
+            // Extract the filename from the URL
+            const imageName = path.basename(imageUrl);
+            
+            // Path to the downloaded boss images
+            const bossImagesDir = path.join(__dirname, '../boss_images');
+            const bossImagePath = path.join(bossImagesDir, imageName);
+            
+            // Check if we have the image
+            const hasImage = fs.existsSync(bossImagePath);
+            console.log(`${hasImage ? 'Found' : 'Could not find'} image: ${imageName}`);
             
             const arr = Array.from(chatIDs);
             for (let i = 0; i < arr.length; i++) {
                 console.log(`Sending message to: ${arr[i]}`);
                 
-                // Send message with image through our proxy
-                await sock.sendMessage(arr[i], {
-                    image: { url: imagePath },
-                    caption: response
-                });
+                if (hasImage) {
+                    // Send message with local boss image
+                    await sock.sendMessage(arr[i], {
+                        image: { url: bossImagePath },
+                        caption: response
+                    });
+                } else {
+                    // If we don't have the image, send text only as a fallback
+                    await sock.sendMessage(arr[i], { 
+                        text: response 
+                    });
+                }
                 
                 console.log('Message sent to:', arr[i]);
             }
