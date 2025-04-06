@@ -15,6 +15,20 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  
+  redis-commander:
+    image: ghcr.io/joeferner/redis-commander:latest
+    container_name: redis-commander
+    ports:
+      - "8316:8081"
+    environment:
+      - REDIS_HOSTS=local:redis:6379:0:${REDIS_PASSWORD}
+      - HTTP_USER=${REDIS_UI_USERNAME}
+      - HTTP_PASSWORD=${REDIS_UI_PASSWORD}
+      - HTTP_AUTH_ENABLED=true
+    restart: unless-stopped
+    depends_on:
+      - redis
 
 volumes:
   redis_data:
