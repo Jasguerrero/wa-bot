@@ -1,0 +1,55 @@
+{
+    "rabbit_version": "3.12.0",
+    "users": [
+      {
+        "name": "{{RABBITMQ_USER}}",
+        "password_hash": "{{RABBITMQ_PASSWORD_HASH}}",
+        "hashing_algorithm": "rabbit_password_hashing_sha256",
+        "tags": "administrator"
+      }
+    ],
+    "vhosts": [
+      {
+        "name": "/"
+      }
+    ],
+    "permissions": [
+      {
+        "user": "{{RABBITMQ_USER}}",
+        "vhost": "/",
+        "configure": ".*",
+        "write": ".*",
+        "read": ".*"
+      }
+    ],
+    "queues": [
+      {
+        "name": "notification_queue",
+        "vhost": "/",
+        "durable": true,
+        "auto_delete": false,
+        "arguments": {}
+      }
+    ],
+    "exchanges": [
+      {
+        "name": "notifications",
+        "vhost": "/",
+        "type": "direct",
+        "durable": true,
+        "auto_delete": false,
+        "internal": false,
+        "arguments": {}
+      }
+    ],
+    "bindings": [
+      {
+        "source": "notifications",
+        "vhost": "/",
+        "destination": "notification_queue",
+        "destination_type": "queue",
+        "routing_key": "user.notification",
+        "arguments": {}
+      }
+    ]
+  }
